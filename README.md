@@ -1,9 +1,5 @@
 07.03.2025
 
-Caricare un font da google.
+Creazione di snippet di codice HTML.
 
-Disabilitare la cache su chrome.
-
-Inserire bootstrap, e impostare la pagina.
-
-Fine della lezione 2 - 9 - Creazione Layout Grafico (Prima Parte)
+Fine della lezione 2 - 10 - Creazione Layout Grafico (Seconda Parte)

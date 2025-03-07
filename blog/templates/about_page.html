@@ -3,13 +3,20 @@
 {% block title %} About page
 {% endblock %}
 
-
 {% block content %}
-
-<div>
-    <h1>About page</h1>
-
+<div class="container content-container">
+    <div class="row no-gutters">
+        <div class="col-md-9 order-md-2">
+            <div>
+                <p class="lead">About me</p>
+                <hr>
+                {{lipsum()}}
+                <hr>
+            </div>
+        </div>
+        <div class="col-md-3 order-md-1 ">
+            {% include 'about_me_snippet.html'%}
+        </div>
+    </div>
 </div>
 {% endblock %}
-
-<hr>
