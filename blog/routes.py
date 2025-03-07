@@ -8,3 +8,7 @@ def homepage():
     some_boolean_flag = True
     return render_template("homepage.html", posts=posts, 
                            boolean_flag=some_boolean_flag)
+
+@app.route("/about")
+def about():
+    return render_template("about_page.html")

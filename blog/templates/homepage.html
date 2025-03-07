@@ -3,34 +3,26 @@
 {% block title %} Home
 {% endblock %}
 
-
 {% block content %}
+<div class="container content-container">
+    <div class="row no-gutters">
+        <div class="col-md-9 order-md-2">
+            <div>
+                {% for post in posts %}
+                <div>
+                    <h5>{{post.title}}</h5>
+                    <p>{{post.body}}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-3 order-md-1">
+            <p>some content</p>
+        </div>
+    </div>
 
-<div>
-    <h1>Homepage n.1</h1>
-    {% for post in posts %}
-    <h5>{{post.title}}</h5>
-    <p>{{post.body}}</p>
-    {% endfor %}
-    {% if boolean_flag %}
-    <p>Boolean flag: True</p>
-    {% endif %}
+
 </div>
 {% endblock %}
 
 <hr>
-{% block content2 %}
-
-<div style="background-color: rgb(229, 255, 0); width:50% ">
-    <h1>Homepage n.1</h1>
-    {% for post in posts %}
-    <h5>{{post.title}}</h5>
-    <p>{{post.body}}</p>
-    {% endfor %}
-    {% if boolean_flag %}
-    <p>Boolean flag: True</p>
-    {% endif %}
-</div>
-<hr>
-
-{% endblock %}

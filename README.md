@@ -1,4 +1,9 @@
-06.03.2025
+07.03.2025
 
-Inserire più blocci in una sola pagina
-Fine della lezione 2 - 8 Template e file statici
+Caricare un font da google.
+
+Disabilitare la cache su chrome.
+
+Inserire bootstrap, e impostare la pagina.
+
+Fine della lezione 2 - 9 - Creazione Layout Grafico (Prima Parte)
