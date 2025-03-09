@@ -1,5 +1,7 @@
 07.03.2025
 
-Creazione di snippet di codice HTML.
+Utilizzo del database.
 
-Fine della lezione 2 - 10 - Creazione Layout Grafico (Seconda Parte)
+Comando: flask shell
+
+Fine della lezione 2 - 14 - Mostrare la lsta di Posts
