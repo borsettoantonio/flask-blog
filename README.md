@@ -1,7 +1,7 @@
-07.03.2025
+11.03.2025
 
 Utilizzo del database.
 
-Comando: flask shell
+Passaggio dei parametri tramite URL
 
-Fine della lezione 2 - 14 - Mostrare la lsta di Posts
+Fine della lezione 2 - 15 - Come Renderizzare Post Singoli

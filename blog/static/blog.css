@@ -44,3 +44,21 @@ body {
 .p-small-two {
     font-size: 0.800rem;
 }
+
+.custom-link {
+    color: #000;
+    text-decoration: none;
+}
+
+.custom-link:hover {
+    color: #343a40;
+    text-decoration: none;
+}
+
+.post-page-block {
+    background-color: #fff;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 30px;
+}

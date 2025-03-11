@@ -10,3 +10,8 @@ def homepage():
 @app.route("/about")
 def about():
     return render_template("about_page.html")
+
+@app.route("/post/<int:post_id>")
+def post_detail(post_id):
+    post_instance = Post.query.get_or_404(post_id)
+    return render_template("post_detail.html",post=post_instance)
