@@ -1,7 +1,7 @@
-11.03.2025
+14.03.2025
 
-Utilizzo del database.
+Form di login.
 
-Passaggio dei parametri tramite URL
+Login Manager e varie librerie utilizzate.
 
-Fine della lezione 2 - 15 - Come Renderizzare Post Singoli
+Fine della lezione 2 - 17 - Autenticazione Utenti Settaggio Login Manager
