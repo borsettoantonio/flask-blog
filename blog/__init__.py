@@ -3,6 +3,7 @@ from flask_login import LoginManager
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_misaka import Misaka
 from config import Config
 
 app=Flask(__name__)
@@ -12,6 +13,7 @@ db= SQLAlchemy(app)
 migrate = Migrate(app,db)
 login_manager = LoginManager(app)
 
+Misaka(app)
 
 with app.app_context():
     if db.engine.url.drivername == 'sqlite':
