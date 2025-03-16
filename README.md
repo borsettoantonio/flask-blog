@@ -1,4 +1,4 @@
-15.03.2025
+16.03.2025
 
 
-Fine della lezione 2 - 18 - Interfaccia per la Creazione di Nuovi Post
+Fine della lezione 2 - 19 - Implementazione funzionalità di Aggiornamento
