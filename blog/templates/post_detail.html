@@ -15,6 +15,10 @@
                 {% if current_user.is_authenticated and current_user == post.author %}
                 <a class="btn btn-sm btn-outline-success"
                     href="{{ url_for('post_update', post_id=post.id) }}">Aggiorna</a>
+                <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
+                    data-bs-target="#deletePostModal">
+                    Cancella
+                </button>
                 {% endif %}
                 <p>
                     {{post.body|markdown}}
@@ -26,4 +30,7 @@
         </div>
     </div>
 </div>
+
+{% include 'post_delete_modal.html' %}
+
 {% endblock %}
