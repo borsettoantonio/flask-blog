@@ -5,6 +5,7 @@ from blog import app, db
 from blog.forms import LoginForm, PostForm
 from blog.models import Post, User
 import config
+from blog.utils import save_picture
 
 @app.route('/')
 def homepage():
@@ -19,6 +20,16 @@ def post_create():
     if form.validate_on_submit():
         new_post = Post(title=form.title.data, body=form.body.data,
                         description=form.description.data, author=current_user)
+        if form.image.data:
+            try:
+                image = save_picture(form.image.data)
+                new_post.image = image
+            except Exception:
+                db.session.add(new_post)
+                db.session.commit()
+                flash("C'è stato un problema con l'upload dell'immagine. Cambia immagine e riprova.")    
+                return redirect(url_for('post_update', post_id=new_post.id))
+
         db.session.add(new_post)
         db.session.commit()
         return redirect(url_for('post_detail', post_id=new_post.id))
@@ -35,6 +46,14 @@ def post_update(post_id):
         post_instance.title = form.title.data
         post_instance.description = form.description.data
         post_instance.body = form.body.data
+        if form.image.data:
+            try:
+                image = save_picture(form.image.data)
+                post_instance.image = image
+            except Exception:
+                db.session.commit()
+                flash("C'è stato un problema con l'upload dell'immagine. Cambia immagine e riprova.")    
+                return redirect(url_for('post_update', post_id=post_instance.id))
         db.session.commit()
         return redirect(url_for('post_detail', post_id=post_instance.id))
     elif request.method == "GET":

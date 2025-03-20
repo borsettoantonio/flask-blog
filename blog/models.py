@@ -34,6 +34,8 @@ class Post(db.Model):
     title = db.Column(db.String(120), nullable=False)
     description = db.Column(db.String(240))
     body = db.Column(db.Text(), nullable=False)
+    image = db.Column(db.String(120))
+    
 
     def __repr__(self):
         return f"Post('{ self.id }', '{ self.title }')"
