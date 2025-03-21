@@ -11,6 +11,10 @@ body {
     padding: 0;
 }
 
+.pagination-block {
+    margin-bottom: 30px;
+}
+
 .navbar-bg-white {
     background-color: #fff;
     border: 1px solid #d3d3d3;
@@ -80,11 +84,14 @@ body {
     .post-image-block {
         margin-left: 30px;
     }
-}
 
-@media (min-width: 768px) {
-    .nav-link {
-        padding-right: 0px !important;
-        padding-left: 1rem !important;
+    .pagination-block {
+        margin-left: 30px;
     }
-}
+
+    @media (min-width: 768px) {
+        .nav-link {
+            padding-right: 0px !important;
+            padding-left: 1rem !important;
+        }
+    }

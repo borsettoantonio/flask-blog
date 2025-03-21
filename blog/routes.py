@@ -9,9 +9,23 @@ from blog.utils import save_picture
 
 @app.route('/')
 def homepage():
-    print(config.Config.SECRET_KEY)
-    posts = Post.query.order_by(Post.created_at.desc()).all()
-    return render_template("homepage.html", posts=posts)
+    #print(config.Config.SECRET_KEY)
+    page_number = request.args.get('page', 1, type=int)
+    posts = Post.query.order_by(Post.created_at.desc()).paginate(page=page_number, per_page=5, error_out=True)
+
+    if posts.has_next:
+        next_page = url_for('homepage', page=posts.next_num)
+    else:
+        next_page = None
+
+    if posts.has_prev:
+        previous_page = url_for('homepage', page=posts.prev_num)
+    else:
+        previous_page = None 
+
+    return render_template("homepage.html", posts=posts, current_page=page_number,
+                           next_page=next_page, previous_page=previous_page)
+
 
 @app.route("/create-post", methods=["GET", "POST"])
 @login_required
