@@ -3,7 +3,7 @@
 {% block title %}Post Editor - Borsetto{% endblock %}
 
 {% block content %}
-<div class="container content-container mt-3">
+<div class="container content-container mt-3 px-3 px-lg-0">
     {% if request.path == "/create-post" %}
     <h2>Crea un nuovo Post</h2>
     {% else %}
@@ -11,64 +11,63 @@
     {% endif %}
     <div class="row no-gutters">
         <div class="col">
-            <div class="mb-3">
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                {% for message in messages %}
-                <p style="color: #dc3545">{{ message }}</p>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <p style="color: #dc3545">{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+
+        <form method="POST" enctype="multipart/form-data" novalidate>
+            {{ form.hidden_tag() }} <!-- csrf_token -->
+            <div class="form-group">
+                {{ form.title.label }}
+                {{ form.title(class="form-control") }}
+                {% if form.title.errors %}
+                {% for error in form.title.errors %}
+                <span class="text-danger">{{ error }}</span>
+                <br>
                 {% endfor %}
                 {% endif %}
-                {% endwith %}
             </div>
-
-            <form method="POST" enctype="multipart/form-data" novalidate>
-                {{ form.hidden_tag() }} <!-- csrf_token -->
-                <div class="form-group">
-                    {{ form.title.label }}
-                    {{ form.title(class="form-control") }}
-                    {% if form.title.errors %}
-                    {% for error in form.title.errors %}
-                    <span class="text-danger">{{ error }}</span>
-                    <br>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.description.label }}
-                    {{ form.description(class="form-control") }}
-                    {% if form.description.errors %}
-                    {% for error in form.description.errors %}
-                    <span class="text-danger">{{ error }}</span>
-                    <br>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.body.label }}
-                    {{ form.body(class="form-control", rows=15) }}
-                    {% if form.body.errors %}
-                    {% for error in form.body.errors %}
-                    <span class="text-danger">{{ error }}</span>
-                    <br>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.image.label(class="mt-2") }}
-                    <br>
-                    {{ form.image(class="form-control-file mt-2") }}
-                    <br>
-                    {% if form.image.errors %}
-                    {% for error in form.image.errors %}
-                    <span class="text-danger">{{ error }}</span>
-                    <br>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-                <hr>
-                {{ form.submit(class="btn btn-sm btn-outline-secondary") }}
-            </form>
-        </div>
+            <div class="form-group">
+                {{ form.description.label }}
+                {{ form.description(class="form-control") }}
+                {% if form.description.errors %}
+                {% for error in form.description.errors %}
+                <span class="text-danger">{{ error }}</span>
+                <br>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.body.label }}
+                {{ form.body(class="form-control", rows=15) }}
+                {% if form.body.errors %}
+                {% for error in form.body.errors %}
+                <span class="text-danger">{{ error }}</span>
+                <br>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.image.label(class="mt-2") }}
+                <br>
+                {{ form.image(class="form-control-file mt-2") }}
+                <br>
+                {% if form.image.errors %}
+                {% for error in form.image.errors %}
+                <span class="text-danger">{{ error }}</span>
+                <br>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <hr>
+            {{ form.submit(class="btn btn-sm btn-outline-secondary") }}
+        </form>
     </div>
+</div>
 </div>
 {% endblock %}

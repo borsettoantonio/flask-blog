@@ -19,7 +19,8 @@ body {
 .navbar-container {
     max-width: 900px;
     font-size: 0.5;
-    padding: 10px 0px 10px 0px;
+    padding: 10px 20px;
+    margin: px 10px 5px;
 }
 
 .about-snippet-block {
@@ -61,4 +62,29 @@ body {
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 30px;
+}
+
+@media (min-width: 768px) {
+    .single-post-home {
+        margin-left: 30px;
+    }
+
+    .about-page-block {
+        margin-left: 30px;
+    }
+
+    .post-page-block {
+        margin-left: 30px;
+    }
+
+    .post-image-block {
+        margin-left: 30px;
+    }
+}
+
+@media (min-width: 768px) {
+    .nav-link {
+        padding-right: 0px !important;
+        padding-left: 1rem !important;
+    }
 }
