@@ -91,6 +91,11 @@ def post_delete(post_id):
 def about():
     return render_template("about_page.html")
 
+@app.route("/contact")
+def contact():
+    return render_template("contact_page.html")
+
+
 @app.route("/post/<int:post_id>")
 def post_detail(post_id):
     post_instance = Post.query.get_or_404(post_id)
