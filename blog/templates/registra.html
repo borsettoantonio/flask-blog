@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Post Editor - Borsetto{% endblock %}
+
+{% block content %}
+<div class="container content-container mt-3 px-3 px-lg-0">
+
+    <div class="row no-gutters">
+        <div class="col">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <p style="color: #dc3545">{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+
+        <form method="POST" novalidate>
+            {{ form.hidden_tag() }} <!-- csrf_token -->
+            <div class="form-group">
+                {{ form.nome.label(class="mt-2") }}
+                {{ form.nome(class="form-control") }}
+                {% if form.nome.errors %}
+                {% for error in form.nome.errors %}
+                <span class="text-danger">{{ error }}</span>
+                <br>
+                <hr>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.cognome.label(class="mt-2") }}
+                {{ form.cognome(class="form-control") }}
+                {% if form.cognome.errors %}
+                {% for error in form.cognome.errors %}
+                <span class="text-danger">{{ error }}</span>
+                <br>
+                <hr>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.username.label(class="mt-2") }}
+                {{ form.username(class="form-control", rows=15) }}
+                {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                <span class="text-danger">{{ error }}</span>
+                <br>
+                <hr>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.email.label(class="mt-2") }}
+                {{ form.email(class="form-control") }}
+                {% if form.email.errors %}
+                {% for error in form.email.errors %}
+                <span class="text-danger">{{ error }}</span>
+                <br>
+                <hr>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.password.label(class="mt-2") }}
+                {{ form.password(class="form-control") }}
+                {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                <span class="text-danger">{{ error }}</span>
+                <br>
+                <hr>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.ripeti_password.label(class="mt-2") }}
+                {{ form.ripeti_password(class="form-control") }}
+                {% if form.ripeti_password.errors %}
+                {% for error in form.ripeti_password.errors %}
+                <span class="text-danger">{{ error }}</span>
+                <br>
+                <hr>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <hr>
+            {{ form.submit(class="btn btn-sm btn-outline-secondary") }}
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}

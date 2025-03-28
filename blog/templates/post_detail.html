@@ -26,9 +26,18 @@
                     Cancella
                 </button>
                 {% endif %}
+                <br>
+                <br>
+                {% if post.markdown%}
                 <p>
                     {{post.body|markdown}}
                 </p>
+                {% else %}
+                <p class="mostra-a-capo">
+                    {{-post.body-}}
+                </p>
+                {% endif %}
+
             </div>
         </div>
         <div class="col-md-3 order-md-1 ">

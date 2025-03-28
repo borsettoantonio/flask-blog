@@ -1,4 +1,6 @@
-22.03.2025
+28.03.2025
 
 
-Lezione 2 terminata.
+Prima versione modificata.
+
+Inserimento di registrazione e login per tutti gli utenti.

@@ -2,7 +2,7 @@ from flask import abort, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_user, logout_user, login_required
 
 from blog import app, db
-from blog.forms import LoginForm, PostForm
+from blog.forms import LoginForm, PostForm, RegistraForm
 from blog.models import Post, User
 import config
 from blog.utils import save_picture
@@ -49,6 +49,30 @@ def post_create():
         return redirect(url_for('post_detail', post_id=new_post.id))
     return render_template("post_editor.html", form=form)
 
+@app.route("/registra", methods=["GET", "POST"])
+def user_create():
+    form = RegistraForm()
+    if form.validate_on_submit():
+        if form.password.data != form.ripeti_password.data:
+            flash("Le password non combaciano!")
+            return  render_template("registra.html", form=form)
+        user = User.query.filter_by(username=form.username.data).first()
+        if user == None:
+            new_user = User(nome=form.nome.data, cognome=form.cognome.data,
+                        username=form.username.data, email=form.email.data)
+            new_user.set_password_hash(form.password.data)
+            try:
+                db.session.add(new_user)
+                db.session.commit()
+            except Exception as e:
+                flash(e.orig.args[0])   
+                return render_template("registra.html", form=form) 
+        else:
+            flash("Username già esistente!")
+            return render_template("registra.html", form=form)
+        return redirect(url_for('homepage'))
+    return render_template("registra.html", form=form)
+
 @app.route("/posts/<int:post_id>/update", methods=["GET", "POST"])
 @login_required
 def post_update(post_id):
@@ -60,6 +84,7 @@ def post_update(post_id):
         post_instance.title = form.title.data
         post_instance.description = form.description.data
         post_instance.body = form.body.data
+        post_instance.markdown = form.markdown.data
         if form.image.data:
             try:
                 image = save_picture(form.image.data)
@@ -74,6 +99,7 @@ def post_update(post_id):
         form.title.data = post_instance.title
         form.description.data = post_instance.description
         form.body.data = post_instance.body
+        form.markdown.data = post_instance.markdown
     return render_template("post_editor.html", form=form)
 
 @app.route("/posts/<int:post_id>/delete", methods=["POST"])
@@ -119,3 +145,11 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('homepage'))
+
+# form di prova
+@app.route("/prova")
+def prova():
+    form = PostForm()
+    if form.validate_on_submit():
+        return redirect(url_for('prova')) 
+    return render_template("prova.html", form=form)

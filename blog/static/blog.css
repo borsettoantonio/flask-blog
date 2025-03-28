@@ -89,6 +89,10 @@ body {
         margin-left: 30px;
     }
 
+    .mostra-a-capo {
+        white-space: pre-wrap;
+    }
+
     @media (min-width: 768px) {
         .nav-link {
             padding-right: 0px !important;
