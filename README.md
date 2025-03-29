@@ -1,6 +1,4 @@
 29.03.2025
 
 
-Prima versione modificata.
-
-Inserimento dell'immagine dell'utente per ogni post in homepage.
+Cancellazione dell'immagine del post cancellando il post stesso

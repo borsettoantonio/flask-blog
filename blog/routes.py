@@ -6,6 +6,7 @@ from blog.forms import LoginForm, PostForm, RegistraForm
 from blog.models import Post, User
 import config
 from blog.utils import save_post_picture, save_user_picture
+import os
 
 @app.route('/')
 def homepage():
@@ -129,6 +130,13 @@ def post_delete(post_id):
     post_instance = Post.query.get_or_404(post_id)
     if post_instance.author != current_user:
         abort(403)
+    image=app.root_path + "\\static\\img\\posts\\" + post_instance.image
+    image = os.path.normpath(image)
+    print(image)
+    #image = os.path.join('D:/ProvePython/CorsoFlask/FLASK-BLOG/blog' , post_instance.image)
+    
+    os.remove(image)
+        
     db.session.delete(post_instance)
     db.session.commit()
     return redirect(url_for('homepage'))
