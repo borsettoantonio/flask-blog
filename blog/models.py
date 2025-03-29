@@ -18,6 +18,7 @@ class User(UserMixin,db.Model):
     email = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(25), nullable=False)
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+    image = db.Column(db.String(120))
 
     def __repr__(self):
         return f"User('{ self.id }', '{ self.username }', '{ self.email }')"

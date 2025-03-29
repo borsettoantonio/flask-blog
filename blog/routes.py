@@ -1,25 +1,36 @@
-from flask import abort, flash, redirect, render_template, request, url_for
+from flask import abort, flash, redirect, render_template, request, session, url_for
 from flask_login import current_user, login_user, logout_user, login_required
 
 from blog import app, db
 from blog.forms import LoginForm, PostForm, RegistraForm
 from blog.models import Post, User
 import config
-from blog.utils import save_picture
+from blog.utils import save_post_picture, save_user_picture
 
 @app.route('/')
 def homepage():
     #print(config.Config.SECRET_KEY)
     page_number = request.args.get('page', 1, type=int)
-    posts = Post.query.order_by(Post.created_at.desc()).paginate(page=page_number, per_page=5, error_out=True)
+    posts1 = Post.query.order_by(Post.created_at.desc()).paginate(page=page_number, per_page=5, error_out=True)
 
-    if posts.has_next:
-        next_page = url_for('homepage', page=posts.next_num)
+    posts =[]
+    for post in posts1.items:
+        utente = Post.query.get(post.user_id)
+        utente_image = User.query.get(utente.id).image
+        if utente_image :
+            utente_image = '/static/img/users/' + utente_image
+        else:
+            utente_image = '/static/img/users/utente_none.jpg'
+        posts.append((post, utente_image))
+
+
+    if posts1.has_next:
+        next_page = url_for('homepage', page=posts1.next_num)
     else:
         next_page = None
 
-    if posts.has_prev:
-        previous_page = url_for('homepage', page=posts.prev_num)
+    if posts1.has_prev:
+        previous_page = url_for('homepage', page=posts1.prev_num)
     else:
         previous_page = None 
 
@@ -36,7 +47,7 @@ def post_create():
                         description=form.description.data, author=current_user)
         if form.image.data:
             try:
-                image = save_picture(form.image.data)
+                image = save_post_picture(form.image.data)
                 new_post.image = image
             except Exception:
                 db.session.add(new_post)
@@ -61,6 +72,16 @@ def user_create():
             new_user = User(nome=form.nome.data, cognome=form.cognome.data,
                         username=form.username.data, email=form.email.data)
             new_user.set_password_hash(form.password.data)
+
+            if form.image.data:
+                try:
+                    image = save_user_picture(form.image.data)
+                    new_user.image = image
+                except Exception:
+                    db.session.add(new_user)
+                    db.session.commit()
+                    flash("C'è stato un problema con l'upload dell'immagine. Cambia immagine e riprova.")    
+                    return redirect(url_for('user_create'))
             try:
                 db.session.add(new_user)
                 db.session.commit()
@@ -87,7 +108,7 @@ def post_update(post_id):
         post_instance.markdown = form.markdown.data
         if form.image.data:
             try:
-                image = save_picture(form.image.data)
+                image = save_post_picture(form.image.data)
                 post_instance.image = image
             except Exception:
                 db.session.commit()

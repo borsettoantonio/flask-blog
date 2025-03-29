@@ -7,21 +7,28 @@
 <div class="container content-container">
     <div class="row no-gutters">
         <div class="col-md-9 order-md-2">
+            <div class="container content-container">
+                {% for post, image in posts %}
+                <div class="single-post-home">
+                    <div class="row no-gutters">
+                        <div class="col-2 px-0">
+                            <img src="{{ image }}" width="100px" height="100px" alt="">
+                        </div>
+                        <div class="col-10">
+                            <h5>
+                                <a class=" custom-link" href="{{url_for('post_detail', post_id=post.id)}}">
+                                    {{post.title}}</a>
+                            </h5>
+                            <p class="p-small-two text-muted">{{post.created_at.strftime('%d-%m-%Y')}}</p>
+                            {% if post.description %}
+                            <p class="p-small-one text-muted mb-0">{{post.description}}</p>
+                            {% endif %}
+                        </div>
+                    </div>
 
-            {% for post in posts.items %}
-            <div class="single-post-home">
-                <h5>
-                    <a class="custom-link" href="{{url_for('post_detail', post_id=post.id)}}"> {{post.title}}</a>
-                </h5>
-
-                <p class="p-small-two text-muted">{{post.created_at.strftime('%d-%m-%Y')}}</p>
-                {% if post.description %}
-                <p class="p-small-one text-muted mb-0">{{post.description}}</p>
-                {% endif %}
-
-
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
             <div class="pagination-block">
                 {% if previous_page %}
                 {% if current_page == 2 %}

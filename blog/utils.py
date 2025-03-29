@@ -27,12 +27,18 @@ def title_slugifier(post_title):
     slug = slugify(post_title) + "-" + generate_random_string()
     return slug
 
-def save_picture(form_data):
+def save_picture(form_data,folder):
     filename = form_data.filename
     picture_name = generate_random_string() + "-" + filename
-    picture_path = os.path.join(current_app.root_path, UPLOAD_FOLDER, picture_name)
+    picture_path = os.path.join(current_app.root_path, UPLOAD_FOLDER, folder,  picture_name)
 
     image = Image.open(form_data)
     image.save(picture_path)
 
     return picture_name
+
+def save_post_picture(form_data):
+    return save_picture(form_data,'posts')
+
+def save_user_picture(form_data):
+    return save_picture(form_data,'users')

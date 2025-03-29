@@ -32,5 +32,6 @@ class RegistraForm(FlaskForm):
         validators=[DataRequired("Campo Obbligatorio!"), Length(max=50, message="Assicurati che il campo descrizione non superi i 50 caratteri.")])
     password = StringField('Password', validators=[DataRequired("Campo Obbligatorio!"),Length(min=3, max=25, message="Assicurati che il nome abbia tra i 3 e i 25 caratteri.")])
     ripeti_password = StringField('Ripeti la password', validators=[DataRequired("Campo Obbligatorio!"),Length(min=3, max=25, message="Assicurati che il nome abbia tra i 3 e i 25 caratteri.")])
+    image = FileField('La tua immagine', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Registra')
 
