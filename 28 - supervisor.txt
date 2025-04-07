@@ -1,0 +1,11 @@
+# sudo nano /etc/supervisor/conf.d/flask.conf
+
+
+[program:flaskblog]
+command=/home/flask/bin/gunicorn -b localhost:8000 -w 4 run:app
+directory=/home/flask/flask-blog
+user=flask
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true

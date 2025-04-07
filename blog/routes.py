@@ -16,8 +16,7 @@ def homepage():
 
     posts =[]
     for post in posts1.items:
-        utente = Post.query.get(post.user_id)
-        utente_image = User.query.get(utente.id).image
+        utente_image = User.query.get(post.user_id).image
         if utente_image :
             utente_image = '/static/img/users/' + utente_image
         else:
@@ -37,6 +36,11 @@ def homepage():
 
     return render_template("homepage.html", posts=posts, current_page=page_number,
                            next_page=next_page, previous_page=previous_page)
+
+
+# login di prova:
+# admin    pippo
+# mario    mario
 
 
 @app.route("/create-post", methods=["GET", "POST"])

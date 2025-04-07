@@ -1,0 +1,14 @@
+server {
+    listen 80;
+    server_name 68.183.215.52;
+
+    location /static/ {
+        alias /home/flask/flask/blog/static/;
+    }
+
+    location / {
+        proxy_pass http://localhost:8000;
+        include /etc/nginx/proxy_params;
+        proxy_redirect off;
+    }
+}
