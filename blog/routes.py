@@ -134,12 +134,18 @@ def post_delete(post_id):
     post_instance = Post.query.get_or_404(post_id)
     if post_instance.author != current_user:
         abort(403)
-    image=app.root_path + "\\static\\img\\posts\\" + post_instance.image
-    image = os.path.normpath(image)
-    print(image)
-    #image = os.path.join('D:/ProvePython/CorsoFlask/FLASK-BLOG/blog' , post_instance.image)
-    
-    os.remove(image)
+    try:
+        #raise Exception("errore")
+        if post_instance.image:
+            image=app.root_path + "/static/img/posts/" + post_instance.image
+            image = os.path.normpath(image)
+            #print(image)
+            #image = os.path.join('D:/ProvePython/CorsoFlask/FLASK-BLOG/blog' , post_instance.image)
+            os.remove(image)
+
+    except Exception as err:
+        return render_template("errore.html", err=err, image = image)
+
         
     db.session.delete(post_instance)
     db.session.commit()
@@ -185,4 +191,9 @@ def prova():
     form = PostForm()
     if form.validate_on_submit():
         return redirect(url_for('prova')) 
+    return render_template("prova.html", form=form)
+
+# form di errore
+@app.route("/errore")
+def errore(exception):
     return render_template("prova.html", form=form)
