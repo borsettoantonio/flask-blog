@@ -1,4 +1,6 @@
-30.03.2025
+15.04.2025
 
 
-Sito (quasi) definitivo.
+Ho tolto l'accesso al database con ORM,
+
+e messo un accesso diretto con SQL.

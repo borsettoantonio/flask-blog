@@ -18,7 +18,7 @@
                     {{post.title}}
                 </h3>
                 <p class="p-small-two text-muted">{{post.created_at.strftime('%d-%m-%Y')}}</p>
-                {% if current_user.is_authenticated and current_user == post.author %}
+                {% if current_user.is_authenticated and current_user.id == post.user_id %}
                 <a class="btn btn-sm btn-outline-success"
                     href="{{ url_for('post_update', post_id=post.id) }}">Aggiorna</a>
                 <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
