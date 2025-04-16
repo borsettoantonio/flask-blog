@@ -10,7 +10,7 @@
             <div class="post-page-block">
                 {% if post.image %}
                 <div>
-                    <img class="img-fluid" src="{{ url_for('static', filename='img/posts/' + post.image) }}" alt="">
+                    <img class="img-fluid" src="{{ url_for('static', filename= post.image) }}" alt="">
                 </div>
                 {% endif %}
 
@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="col-md-3 order-md-1 ">
-            {% include 'about_me_snippet.html'%}
+            {% include 'post_snippet.html' %}
         </div>
     </div>
 </div>

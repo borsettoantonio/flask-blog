@@ -1,6 +1,6 @@
-15.04.2025
+16.04.2025
 
 
-Ho tolto l'accesso al database con ORM,
+Ho inserito immagine e nome dell'utente
 
-e messo un accesso diretto con SQL.
+nella visualizzazione di un post.

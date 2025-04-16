@@ -84,8 +84,12 @@ def user_create():
         user = get_user(form.username.data)
 
         if user == None:
-            new_user = User(nome=form.nome.data, cognome=form.cognome.data,
-                        username=form.username.data, email=form.email.data)
+            new_user = User()
+            new_user.nome=form.nome.data
+            new_user.cognome=form.cognome.data
+            new_user.username=form.username.data
+            new_user.email=form.email.data      
+            
             new_user.set_password_hash(form.password.data)
 
             if form.image.data:
@@ -178,7 +182,13 @@ def post_detail(post_id):
     post_instance = get_post(post_id)
     if post_instance == None:
         abort(404)
-    return render_template("post_detail.html",post=post_instance)
+    if post_instance.image :
+        post_instance.image = 'img/posts/' +  post_instance.image
+    else:
+        post_instance.image = 'img/users/utente_none.jpg'
+    user = get_user_by_id(post_instance.user_id)
+    image ='img/users/' +  user.image
+    return render_template("post_detail.html",post=post_instance, user=user,image=image)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -210,4 +220,5 @@ def prova():
 # form di errore
 @app.route("/errore")
 def errore(exception):
+    form = LoginForm()
     return render_template("prova.html", form=form)

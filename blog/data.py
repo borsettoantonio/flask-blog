@@ -38,7 +38,10 @@ def get_user(username):
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM USER WHERE USERNAME = ?;", (username,))
         lista = cursor.fetchall()
-        return  user_from_list_to_obj(lista[0]) 
+        if len(lista) > 0:  
+            return  user_from_list_to_obj(lista[0]) 
+        else:
+            return None
 
 def get_user_by_id(id):
     with sqlite3.connect('blog.db') as conn:
@@ -51,7 +54,7 @@ def get_user_by_id(id):
 def user_insert(user):
      with sqlite3.connect('blog.db') as conn:
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO USER (nome, cognome, username, email, password, posts, image) \
+        cursor.execute("INSERT INTO USER (nome, cognome, username, email, password, image) \
                         VALUES (?, ?, ?, ?, ?, ?);",( user.nome, user.cognome, user.username, user.email, user.password,  user.image  ))
         conn.commit()   
 

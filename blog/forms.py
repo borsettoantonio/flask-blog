@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import BooleanField, PasswordField, StringField, SubmitField, TextAreaField
-from wtforms.validators import DataRequired, Length
+from wtforms.validators import DataRequired, Length , Email
 
 
 class LoginForm(FlaskForm):
@@ -29,9 +29,10 @@ class RegistraForm(FlaskForm):
     username = StringField('User Name',
         validators=[DataRequired("Campo Obbligatorio!"), Length(max=12, message="Assicurati che il campo descrizione non superi i 12 caratteri.")])
     email = StringField('e-mail',
-        validators=[DataRequired("Campo Obbligatorio!"), Length(max=50, message="Assicurati che il campo descrizione non superi i 50 caratteri.")])
-    password = StringField('Password', validators=[DataRequired("Campo Obbligatorio!"),Length(min=3, max=25, message="Assicurati che il nome abbia tra i 3 e i 25 caratteri.")])
-    ripeti_password = StringField('Ripeti la password', validators=[DataRequired("Campo Obbligatorio!"),Length(min=3, max=25, message="Assicurati che il nome abbia tra i 3 e i 25 caratteri.")])
+        validators=[DataRequired("Campo Obbligatorio!"), Length(max=50, message="Assicurati che il campo descrizione non superi i 50 caratteri."),
+                    Email()])
+    password =PasswordField('Password', validators=[DataRequired("Campo Obbligatorio!"),Length(min=3, max=25, message="Assicurati che il nome abbia tra i 3 e i 25 caratteri.")])
+    ripeti_password = PasswordField('Ripeti la password', validators=[DataRequired("Campo Obbligatorio!"),Length(min=3, max=25, message="Assicurati che il nome abbia tra i 3 e i 25 caratteri.")])
     image = FileField('La tua immagine', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Registra')
 

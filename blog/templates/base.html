@@ -35,8 +35,8 @@
                     {% if not current_user.is_authenticated %}
                     <a class="nav-item nav-link{% if request.path == '/login' %} active{% endif %}"
                         href="{{ url_for('login') }}">Login</a>
-                    <!-- <a class="nav-item nav-link{% if request.path == '/registra' %} active{% endif %}"
-                        href="{{ url_for('user_create') }}">Registrazione</a> -->
+                    <a class="nav-item nav-link{% if request.path == '/registra' %} active{% endif %}"
+                        href="{{ url_for('user_create') }}">Registrazione</a>
                     {% endif %}
                     {% if current_user.is_authenticated %}
                     <a class="nav-item nav-link {% if request.path == url_for('post_create') %} active{% endif %}"
